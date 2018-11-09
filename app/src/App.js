@@ -4,12 +4,22 @@ import "./App.css";
 import equals from "react-fast-compare";
 
 class GreatGrandChild extends Component {
+  shouldComponentUpdate(prevProps) {
+    equals(this.props, prevProps);
+    return true;
+  }
+
   render() {
     return <div>GreatGrandChild</div>;
   }
 }
 
 class GrandChild extends Component {
+  shouldComponentUpdate(prevProps) {
+    equals(this.props, prevProps);
+    return true;
+  }
+
   render() {
     return (
       <div>
@@ -20,10 +30,9 @@ class GrandChild extends Component {
 }
 
 class Child extends Component {
-  componentDidUpdate(prevProps) {
-    console.log("componentDidUpdate");
-    console.log("react-fast-compare", equals(this.props, prevProps));
-    console.log(this.props.children);
+  shouldComponentUpdate(prevProps) {
+    equals(this.props, prevProps);
+    return true;
   }
 
   render() {
@@ -40,6 +49,11 @@ class App extends Component {
   state = { count: 0 };
 
   handleClick = () => this.setState({ count: this.state.count + 1 });
+
+  shouldComponentUpdate(prevProps) {
+    equals(this.props, prevProps);
+    return true;
+  }
 
   render() {
     return (
